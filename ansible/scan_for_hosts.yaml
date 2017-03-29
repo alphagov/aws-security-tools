@@ -1,0 +1,15 @@
+---
+- hosts: all
+  tasks:
+    - name: copy list of IPs to be scanned
+      copy:
+        src: '{{ ip_list }}'
+        dest: /tmp/ip_list
+    - name: scan localhost
+      command: "nmap -iL /tmp/ip_list -PS{{ listening_ports }} -oN {{ ansible_hostname }}.discover.nmap -p{{listening_ports}}"
+    - name: fetch reports
+      fetch:
+        src: "{{ ansible_hostname }}.discover.nmap"
+        dest: "reports"
+    - name: remove reports from host
+      command: "rm {{ ansible_hostname }}.discover.nmap /tmp/ip_list"

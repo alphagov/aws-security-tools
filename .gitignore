@@ -1,0 +1,7 @@
+ansible.cfg
+.env/*
+evidence/*
+*.ini
+*.json
+*.ips
+*.retry

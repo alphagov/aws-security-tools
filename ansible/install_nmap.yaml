@@ -1,0 +1,9 @@
+---
+- hosts: all
+  become: yes
+  become_user: root
+  tasks:
+    - name: install nmap
+      apt:
+        name: nmap
+        update_cache: yes
