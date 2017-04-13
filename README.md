@@ -21,3 +21,8 @@ Runs `nmap` on all hosts scanning a provided list of IP addresses (provided by
 `inspect_vpc.py`) attempting to connect to the `listening_ports` which can be
 found by running the `ansible/scan_localhost.yaml`.
 
+## ansible/retrieve_package_list.yaml ##
+
+Runs `apt list --installed` on all hosts and saves the results locally. This can
+be used to in conjunction with https://github.com/davbo/active-cve-check/ to
+identify "active" CVEs against packages.
