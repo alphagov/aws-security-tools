@@ -1,0 +1,8 @@
+---
+- hosts: all
+  tasks:
+    - name: List packages
+      command: "apt list --installed"
+      register: packages
+    - name: Write list
+      local_action: copy content="{{ packages.stdout }}" dest="reports/{{ansible_hostname}}.packages"
