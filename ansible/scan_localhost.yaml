@@ -1,11 +1,8 @@
 ---
 - hosts: all
   tasks:
-    - name: scan localhost
-      command: "nmap -Pn -p 1-65535 -sV localhost -oN {{ ansible_hostname }}.localhost.nmap"
-    - name: fetch reports
-      fetch:
-        src: "{{ ansible_hostname }}.localhost.nmap"
-        dest: "reports"
-    - name: remove reports from host
-      command: "rm {{ ansible_hostname }}.localhost.nmap"
+    - name: capture listening processes
+      command: "sudo netstat -plnt"
+      register: listening
+    - name: Write processes listening
+      local_action: copy content="{{ listening.stdout }}" dest="reports/{{ansible_hostname}}.netstat"

@@ -81,7 +81,7 @@ def pick_vpc(ec2):
 def output_instances_for_ansible(env, filename, instances, filter_tag):
     config = configparser.ConfigParser(allow_no_value=True)
     for instance in instances:
-        name = "{}.{}".format(instance['tags']['Name'], env)
+        name = "{}.{}".format(instance['instance_id'], env)
         if instance['tags'][filter_tag] not in config.sections():
             config[instance['tags'][filter_tag]] = {name: None}
         else:
